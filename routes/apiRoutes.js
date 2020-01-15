@@ -24,8 +24,8 @@ module.exports = function (app) {
         });
     }
 
-    //home page
-    app.get('/', function (req, res) {
+    //Articles from database
+    app.get('/api', function (req, res) {
         db.Article.find({saved: false}, function(err, data){
           res.send(data);
         });
