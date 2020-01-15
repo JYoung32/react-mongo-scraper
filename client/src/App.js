@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
+import Navbar from './components/Navbar';
 import Jumbotron from './components/Jumbotron';
 import axios from 'axios';
+import ArticleCard from './components/ArticleCard';
 
 class App extends React.Component {
 
@@ -36,9 +38,13 @@ class App extends React.Component {
     
     //loop through post state to display posts
     return posts.map((post, index) => (
-      <div key={index}>
-        <h3>{post.headline}</h3>
-        <p>{post.summary}</p>
+      <div className="row d-flex justify-content-center col-lg m-3">
+        <ArticleCard 
+          className="m-3"
+          key={index}
+          headline={post.headline}
+          summary={post.summary}
+        />
       </div>
     ))
   };
@@ -46,9 +52,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Jumbotron />
-        <div classname="articles-">
-          {this.displayArticles(this.state.posts)}
+        <Navbar />
+        <Jumbotron className="mt-3" />
+        <div className="container">
+          <div classname="articles">
+            {this.displayArticles(this.state.posts)}
+          </div>
         </div>
       </div>
     );
