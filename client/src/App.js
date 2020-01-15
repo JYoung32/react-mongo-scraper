@@ -6,7 +6,7 @@ import axios from 'axios';
 import ArticleCard from './components/ArticleCard';
 
 class App extends React.Component {
-
+  
   state = {
     id: '',  
     headline: '',
@@ -15,7 +15,7 @@ class App extends React.Component {
     posts: []
   };
 
-  componentDidMount =() => {
+  componentDidMount = () => {
     this.getArticles();
   }
 
@@ -23,7 +23,7 @@ class App extends React.Component {
     axios.get('/api')
       .then((response) => {
         const data = response.data;
-        console.log(`Data was recieved}`)
+        console.log(`Data was recieved`)
         this.setState({ posts: data });
         console.log(this.state);
       })
@@ -31,6 +31,15 @@ class App extends React.Component {
         console.log(error);
       });
   };
+
+  //removeFriend= id => {
+  //   let friend = this.state.friends.filter(friend => friend.id !== id);
+  //   this.setState({friends: friend})
+  // }
+
+  saveArticles() {
+    console.log(`Clicked`);
+  }
 
   displayArticles = (posts) => {
     //if posts are empty stop here
@@ -44,6 +53,7 @@ class App extends React.Component {
           key={index}
           headline={post.headline}
           summary={post.summary}
+          saveArticles={this.saveArticles}
         />
       </div>
     ))

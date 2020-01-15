@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 
 const ArticleCard = (props) => {
+    console.log(`Props = ${props}`);
     return (
         <div>
             <Card>
@@ -12,7 +13,7 @@ const ArticleCard = (props) => {
                 <CardBody>
                     <CardText>{props.summary}</CardText>
                     <Button className="m-2">Link to URL</Button>
-                    <Button className="m-2">Save Article</Button>
+                    <Button className="m-2" onClick={() => props.saveArticles(props.id)}>Save Article</Button>
                 </CardBody>
                 <CardFooter className="text-muted">NYT</CardFooter>
             </Card>

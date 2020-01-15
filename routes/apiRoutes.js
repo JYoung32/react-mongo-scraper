@@ -26,8 +26,8 @@ module.exports = function (app) {
 
     //Articles from database
     app.get('/api', function (req, res) {
-        db.Article.find({saved: false}, function(err, data){
-          res.send(data);
+        db.Article.find({ saved: false }, function (err, data) {
+            res.send(data);
         });
     });
 
@@ -46,20 +46,20 @@ module.exports = function (app) {
                 result.url = `https://www.nytimes.com${$(element).find("a").attr("href")}`;
                 result.summary = $(element).find("p").text().trim();
 
-                if (result.headline !== '' && result.summary !== ''){
-                    db.Article.findOne({headline: result.headline}, function(err, data) {
-                        if(err){
+                if (result.headline !== '' && result.summary !== '') {
+                    db.Article.findOne({ headline: result.headline }, function (err, data) {
+                        if (err) {
                             console.log(err)
                         } else {
                             if (data === null) {
                                 db.Article.create(result)
-                                .then(function(dbArticle) {
-                                console.log(dbArticle)
-                                })
-                                .catch(function(err) {
-                                // If an error occurred, send it to the client
-                                console.log(err)
-                                });
+                                    .then(function (dbArticle) {
+                                        console.log(dbArticle)
+                                    })
+                                    .catch(function (err) {
+                                        // If an error occurred, send it to the client
+                                        console.log(err)
+                                    });
                             }
                             console.log(data)
                         }
@@ -72,16 +72,42 @@ module.exports = function (app) {
         });
     });
 
+    // save article to database by changed saved field to true
+    app.put("/api/headlines/:id", function (req, res) {
+        var saved = req.body.saved == 'true'
+        if (saved) {
+            db.Article.updateOne({ _id: req.body._id }, { $set: { saved: true } }, function (err, result) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    return res.send("Article Saved to DB.")
+                }
+            });
+        }
+    });
+
+    // delete article from database
+    app.delete("/api/headlines/:id", function (req, res) {
+        console.log(`reqbody: ${JSON.stringify(req.params.id)}`);
+        db.Article.deleteOne({ _id: req.params.id }, function (err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                return res.send("Article Deleted")
+            }
+        });
+    });
+
     // clear all articles from database
-    app.get("/api/clear", function(req, res){
-        
+    app.get("/api/clear", function (req, res) {
+
         console.log(req.body);
-        db.Article.deleteMany({}, function(err, result){
+        db.Article.deleteMany({}, function (err, result) {
             if (err) {
                 console.log(err)
             } else {
                 console.log(result)
-        res.send("Database Cleared");
+                res.send("Database Cleared");
             }
         });
     });
