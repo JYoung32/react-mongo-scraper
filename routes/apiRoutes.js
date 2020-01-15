@@ -9,11 +9,11 @@ const db = require('../models');
 
 //Connecting to MongoDB with mongoose
 mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/react-mongo-scraper", 
+    process.env.MONGODB_URI || "mongodb://localhost/react-mongo-scraper",
     { useNewUrlParser: true }
 );
 
-module.exports = function(app) {
+module.exports = function (app) {
 
     //home page
     if (process.env.NODE_ENV === "production") {
@@ -32,7 +32,7 @@ module.exports = function(app) {
     //API scrape route
     app.get('/api/scrape', function (req, res) {
         //AXIOS get route to pull up NYTimes
-        axios.get('https://www.nytimes.com/').then( function (response) {
+        axios.get('https://www.nytimes.com/').then(function (response) {
             //Store into cheerio and save it to $
             const $ = cheerio.load(response.data);
 
@@ -41,9 +41,39 @@ module.exports = function(app) {
                 //save results to an object
                 var result = {};
                 result.headline = $(element).find("h2").text().trim();
+                result.url = `https://www.nytimes.com${$(element).find("a").attr("href")}`;
+                result.summary = $(element).find("p").text().trim();
 
-                console.log(result.headline);
-            })
+                if (result.headline !== '' && result.summary !== ''){
+                    db.Article.findOne({headline: result.headline}, function(err, data) {
+                        if(err){
+                            console.log(err)
+                        } else {
+                            if (data === null) {
+                                db.Article.create(result)
+                                .then(function(dbArticle) {
+                                console.log(dbArticle)
+                                })
+                                .catch(function(err) {
+                                // If an error occurred, send it to the client
+                                console.log(err)
+                                });
+                            }
+                            console.log(data)
+                        }
+                    })
+                };
+            });
+
+            //if successful and save article, respond
+            res.send("Scrape successful.");
         });
     });
+
+
+
+
+
+
+
 }
