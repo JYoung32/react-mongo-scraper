@@ -74,13 +74,16 @@ module.exports = function (app) {
 
     // save article to database by changed saved field to true
     app.put("/api/headlines/:id", function (req, res) {
-        var saved = req.body.saved == 'true'
+        console.log(req.body);
+        var saved = req.body.saved;
+        console.log(saved);
+        
         if (saved) {
-            db.Article.updateOne({ _id: req.body._id }, { $set: { saved: true } }, function (err, result) {
+            db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function (err, result) {
                 if (err) {
                     console.log(err)
                 } else {
-                    return res.send("Article Saved to DB.")
+                    return res.send("Article Saved to DB")
                 }
             });
         }

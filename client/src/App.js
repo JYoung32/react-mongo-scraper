@@ -12,6 +12,7 @@ class App extends React.Component {
     headline: '',
     summary: '',
     url: '',
+    saved: '',
     posts: []
   };
 
@@ -25,20 +26,31 @@ class App extends React.Component {
         const data = response.data;
         console.log(`Data was recieved`)
         this.setState({ posts: data });
-        console.log(this.state);
+        // console.log(this.state);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  //removeFriend= id => {
-  //   let friend = this.state.friends.filter(friend => friend.id !== id);
-  //   this.setState({friends: friend})
-  // }
-
-  saveArticles() {
+  saveArticles(id) {
     console.log(`Clicked`);
+    console.log(this);
+    console.log(id);
+
+    let saveArticle = this.saved;
+    saveArticle = {saved: true};
+    
+    // saveArticle.saved = true;
+    console.log(saveArticle);
+
+    axios.put(`/api/headlines/${id}`, saveArticle)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   displayArticles = (posts) => {
@@ -51,8 +63,11 @@ class App extends React.Component {
         <ArticleCard 
           className="m-3"
           key={index}
+          id={post._id}
           headline={post.headline}
           summary={post.summary}
+          url={post.url}
+          saved={post.saved}
           saveArticles={this.saveArticles}
         />
       </div>
