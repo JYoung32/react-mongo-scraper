@@ -24,9 +24,11 @@ module.exports = function (app) {
         });
     }
 
-    //get route test
+    //home page
     app.get('/', function (req, res) {
-        res.send('hello world')
+        db.Article.find({saved: false}, function(err, data){
+          res.send(data);
+        });
     });
 
     //API scrape route
@@ -70,7 +72,19 @@ module.exports = function (app) {
         });
     });
 
-
+    // clear all articles from database
+    app.get("/api/clear", function(req, res){
+        
+        console.log(req.body);
+        db.Article.deleteMany({}, function(err, result){
+            if (err) {
+                console.log(err)
+            } else {
+                console.log(result)
+        res.send("Database Cleared");
+            }
+        });
+    });
 
 
 
