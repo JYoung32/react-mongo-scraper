@@ -77,14 +77,27 @@ class App extends React.Component {
           url={post.url}
           saved={post.saved}
           saveArticles={this.saveArticles}
+          deleteSingleArticle={this.deleteSingleArticle}
         />
       </div>
     ))
   };
 
+  //Delete a single article
+  deleteSingleArticle = (id) => {
+
+    axios.delete(`/api/headlines/${id}`)
+      .then((response) => {
+        console.log(response);
+        console.log('Article was deleted');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   //Clear database of articles
   clearArticles = () => {
-    console.log("Clicked");
 
     axios.get('/api/clear')
       .then((response) => {

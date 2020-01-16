@@ -53,15 +53,14 @@ module.exports = function (app) {
                         } else {
                             if (data === null) {
                                 db.Article.create(result)
-                                    .then(function (dbArticle) {
-                                        console.log(dbArticle)
-                                    })
-                                    .catch(function (err) {
-                                        // If an error occurred, send it to the client
-                                        console.log(err)
-                                    });
+                                .then(function (dbArticle) {
+                                    console.log(dbArticle)
+                                })
+                                .catch(function (err) {
+                                    // If an error occurred, send it to the client
+                                    console.log(err)
+                                });
                             }
-                            console.log(data)
                         }
                     })
                 };

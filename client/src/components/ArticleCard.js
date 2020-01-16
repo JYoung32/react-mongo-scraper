@@ -8,7 +8,10 @@ const ArticleCard = (props) => {
     return (
         <div className="w-100">
             <Card>
-                <CardHeader tag="h4">{props.headline}</CardHeader>
+                <CardHeader tag="h4" className="d-flex justify-content-between">
+                    {props.headline}
+                    <Button className="m-2 btn-danger" onClick={() => props.deleteSingleArticle(props.id)}>X</Button>
+                </CardHeader>
                 <CardBody>
                     <CardText>{props.summary}</CardText>
                     <Button className="m-2">Link to URL</Button>
