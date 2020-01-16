@@ -33,16 +33,22 @@ class App extends React.Component {
       });
   };
 
-  saveArticles(id) {
-    console.log(`Clicked`);
-    console.log(this);
-    console.log(id);
+  scrapeArticles = () => {
+    console.log("Clicked");
 
+    axios.get('/api/scrape')
+      .then((response) => {
+        this.getArticles();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  //Save article to MongoDB
+  saveArticles(id) {
     let saveArticle = this.saved;
     saveArticle = {saved: true};
-    
-    // saveArticle.saved = true;
-    console.log(saveArticle);
 
     axios.put(`/api/headlines/${id}`, saveArticle)
       .then((response) => {
@@ -51,8 +57,9 @@ class App extends React.Component {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
+  //Render Articles to home page
   displayArticles = (posts) => {
     //if posts are empty stop here
     if (!posts.length) return null;
@@ -74,10 +81,26 @@ class App extends React.Component {
     ))
   };
 
+  //Clear database of articles
+  clearArticles = () => {
+    console.log("Clicked");
+
+    axios.get('/api/clear')
+      .then((response) => {
+        console.log("DB was cleared.")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  //Render landing page
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <Navbar 
+        scrapeArticles={this.scrapeArticles}
+        clearArticles={this.clearArticles}/>
         <Jumbotron className="mt-3" />
         <div className="container">
           <div classname="articles">

@@ -6,7 +6,7 @@ import {
 
 const ArticleCard = (props) => {
     return (
-        <div>
+        <div className="w-100">
             <Card>
                 <CardHeader tag="h4">{props.headline}</CardHeader>
                 <CardBody>

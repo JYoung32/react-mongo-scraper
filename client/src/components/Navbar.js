@@ -18,8 +18,8 @@ const Navigation = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            <Button color="primary" className="m-3">Scrape</Button>{' '}
-            <Button color="primary" className="m-3">Clear</Button>{' '}
+            <Button color="primary" className="m-3" onClick= {() => props.scrapeArticles()}>Scrape</Button>{' '}
+            <Button color="primary" className="m-3" onClick={() => props.clearArticles()}>Clear</Button>{' '}
             <NavItem>
               <NavLink className="m-3">
                 <Link to="/">Home</Link>

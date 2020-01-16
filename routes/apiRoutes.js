@@ -68,7 +68,7 @@ module.exports = function (app) {
             });
 
             //if successful and save article, respond
-            res.send("Scrape successful.");
+            res.send(data);
         });
     });
 
@@ -77,7 +77,7 @@ module.exports = function (app) {
         console.log(req.body);
         var saved = req.body.saved;
         console.log(saved);
-        
+
         if (saved) {
             db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function (err, result) {
                 if (err) {
