@@ -35,14 +35,15 @@ class App extends React.Component {
 
   scrapeArticles = () => {
     console.log("Clicked");
+    console.log(this.state);
 
-    axios.get('/api/scrape')
-      .then((response) => {
+      axios.get('/api/scrape')
+      .then(response => {
         this.getArticles();
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
   };
 
   //Save article to MongoDB
@@ -88,6 +89,7 @@ class App extends React.Component {
     axios.get('/api/clear')
       .then((response) => {
         console.log("DB was cleared.")
+        this.setState({ posts: [] })
       })
       .catch((error) => {
         console.log(error);

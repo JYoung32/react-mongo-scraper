@@ -66,9 +66,10 @@ module.exports = function (app) {
                     })
                 };
             });
+            console.log('done scrape');
 
             //if successful and save article, respond
-            res.send(data);
+            res.send();
         });
     });
 
@@ -77,7 +78,7 @@ module.exports = function (app) {
         console.log(req.body);
         var saved = req.body.saved;
         console.log(saved);
-
+        
         if (saved) {
             db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function (err, result) {
                 if (err) {
