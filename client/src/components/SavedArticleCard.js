@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText } from 'reactstrap';
-// import Button from './Button';
+import { Card, CardHeader, CardFooter, CardBody, CardTitle, CardText } from 'reactstrap';
+import Button from './Button';
 
-const ArticleCard = (props) => {
+const SavedArticleCard = (props) => {
     return (
         <div className="w-100">
             <Card>
@@ -21,4 +21,4 @@ const ArticleCard = (props) => {
     );
 };
 
-export default ArticleCard;
+export default SavedArticleCard;

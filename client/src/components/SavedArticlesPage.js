@@ -3,7 +3,7 @@ import '../App.css';
 import SavedNavbar from './SavedNavBar';
 import Jumbotron from './Jumbotron';
 import axios from 'axios';
-import ArticleCard from './ArticleCard';
+import SavedArticleCard from './SavedArticleCard';
 
 class SavedArticlePage extends React.Component {
 
@@ -41,7 +41,7 @@ class SavedArticlePage extends React.Component {
         //loop through post state to display posts
         return posts.map((post, index) => (
             <div className="row d-flex justify-content-center col-lg m-3">
-                <ArticleCard
+                <SavedArticleCard
                     className="m-3"
                     key={index}
                     id={post._id}
