@@ -85,6 +85,8 @@ class App extends React.Component {
 
   //Delete a single article
   deleteSingleArticle = (id) => {
+    console.log(id);
+    //code up to remove single article from display
 
     axios.delete(`/api/headlines/${id}`)
       .then((response) => {

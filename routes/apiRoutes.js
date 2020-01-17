@@ -96,7 +96,7 @@ module.exports = function (app) {
             if (err) {
                 console.log(err)
             } else {
-                return res.send("Article Deleted")
+                return res.send(result);
             }
         });
     });
