@@ -22,15 +22,15 @@ class SavedArticlePage extends React.Component {
 
     getArticles = () => {
         axios.get('/api/saved')
-          .then((response) => {
-            const data = response.data;
-            console.log(`Data was recieved`)
-            this.setState({ posts: data });
-            // console.log(this.state);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+            .then((response) => {
+                const data = response.data;
+                console.log(`Data was recieved`)
+                this.setState({ posts: data });
+                // console.log(this.state);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     //Render Articles to home page
@@ -54,6 +54,21 @@ class SavedArticlePage extends React.Component {
                 />
             </div>
         ))
+    };
+
+    //Delete a single article
+    deleteSingleArticle = (id) => {
+        console.log(id);
+        //code up to remove single article from display
+
+        axios.delete(`/api/headlines/${id}`)
+            .then((response) => {
+                console.log(response);
+                console.log('Article was deleted');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     //Clear database of articles

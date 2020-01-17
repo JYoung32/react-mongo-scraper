@@ -59,13 +59,13 @@ module.exports = function (app) {
                         } else {
                             if (data === null) {
                                 db.Article.create(result)
-                                .then(function (dbArticle) {
-                                    console.log(dbArticle)
-                                })
-                                .catch(function (err) {
-                                    // If an error occurred, send it to the client
-                                    console.log(err)
-                                });
+                                    .then(function (dbArticle) {
+                                        console.log(dbArticle)
+                                    })
+                                    .catch(function (err) {
+                                        // If an error occurred, send it to the client
+                                        console.log(err)
+                                    });
                             }
                         }
                     })
@@ -78,12 +78,25 @@ module.exports = function (app) {
         });
     });
 
+    // get back all notes for a given article
+    app.get("/api/notes/:id", function (req, res) {
+        db.Article.findOne({ _id: req.params.id })
+            .populate("note")
+            .then(function (dbArticle) {
+                console.log(dbArticle.note)
+                res.json(dbArticle.note)
+            })
+            .catch(function (err) {
+                res.json(err)
+            })
+    });
+
     // save article to database by changed saved field to true
     app.put("/api/headlines/:id", function (req, res) {
         console.log(req.body);
         var saved = req.body.saved;
         console.log(saved);
-        
+
         if (saved) {
             db.Article.updateOne({ _id: req.params.id }, { $set: { saved: true } }, function (err, result) {
                 if (err) {
