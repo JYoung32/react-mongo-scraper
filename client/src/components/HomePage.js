@@ -114,7 +114,7 @@ class HomePage extends React.Component {
   //Render landing page
   render() {
     return (
-      <div className="App">
+      <div>
         <Navbar 
         scrapeArticles={this.scrapeArticles}
         clearArticles={this.clearArticles}/>

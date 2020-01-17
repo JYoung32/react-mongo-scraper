@@ -31,6 +31,12 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/api/saved', function (req, res) {
+        db.Article.find({ saved: true }, function (err, data) {
+            res.send(data);
+        });
+    });
+
     //API scrape route
     app.get('/api/scrape', function (req, res) {
         //AXIOS get route to pull up NYTimes
