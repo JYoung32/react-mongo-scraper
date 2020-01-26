@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText } from 'reactstrap';
 import NoteCard from './NoteCard';
+import ModalExample from './NoteModal';
 
 
 const SavedArticleCard = (props) => {
@@ -15,8 +16,10 @@ const SavedArticleCard = (props) => {
                     <CardText>{props.summary}</CardText>
                     <hr className="my-2" />
                     <NoteCard />
-                    <Button className="m-2">Link to URL</Button>
-                    <Button className="m-2" >Add a Note</Button>
+                    <div className="row justify-content-center">
+                        <Button className="m-2">Link to URL</Button>
+                        <ModalExample className="m-5"/>
+                    </div>
                 </CardBody>
                 <CardFooter className="text-muted">NYT</CardFooter>
             </Card>
