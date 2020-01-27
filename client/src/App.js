@@ -1,26 +1,20 @@
-import React from 'react';
-import './App.css';
-import HomePage from './components/HomePage';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import SavedArticlePage from './components/SavedArticlesPage';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Nav from "./components/Nav";
+import Articles from "./pages/Articles";
+import savedArticles from "./pages/savedArticles";
+import "./App.css";
 
-class App extends React.Component {
-  
-
-  //Render landing page
-  render() {
-    return (
-        <div className="App">
-          <div>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/savedArticles" component={SavedArticlePage} />
-          </div>
-        </div>
-    );
-  }
-
-}
-
-
+const App = () => 
+  <Router>
+  <div>
+    <Nav />
+    <Switch>
+      <Route exact path="/" component={Articles} />
+      <Route exact path="/saved" component={savedArticles} />
+      <Route component={Articles} />
+    </Switch>
+  </div>
+  </Router>;
 
 export default App;
