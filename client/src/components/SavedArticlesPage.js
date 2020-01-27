@@ -3,7 +3,7 @@ import '../App.css';
 import SavedNavbar from './SavedNavBar';
 import Jumbotron from './Jumbotron';
 import axios from 'axios';
-import SavedArticleCard from './SavedArticleCard';
+import ArticleCard from './ArticleCard';
 
 class SavedArticlePage extends React.Component {
 
@@ -22,15 +22,15 @@ class SavedArticlePage extends React.Component {
 
     getArticles = () => {
         axios.get('/api/saved')
-            .then((response) => {
-                const data = response.data;
-                console.log(`Data was recieved`)
-                this.setState({ posts: data });
-                // console.log(this.state);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+          .then((response) => {
+            const data = response.data;
+            console.log(`Data was recieved`)
+            this.setState({ posts: data });
+            // console.log(this.state);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     };
 
     //Render Articles to home page
@@ -41,7 +41,7 @@ class SavedArticlePage extends React.Component {
         //loop through post state to display posts
         return posts.map((post, index) => (
             <div className="row d-flex justify-content-center col-lg m-3">
-                <SavedArticleCard
+                <ArticleCard
                     className="m-3"
                     key={index}
                     id={post._id}
@@ -54,21 +54,6 @@ class SavedArticlePage extends React.Component {
                 />
             </div>
         ))
-    };
-
-    //Delete a single article
-    deleteSingleArticle = (id) => {
-        console.log(id);
-        //code up to remove single article from display
-
-        axios.delete(`/api/headlines/${id}`)
-            .then((response) => {
-                console.log(response);
-                console.log('Article was deleted');
-            })
-            .catch((error) => {
-                console.log(error);
-            });
     };
 
     //Clear database of articles

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Card, Button, CardHeader, CardFooter, CardBody, CardTitle, CardText } from 'reactstrap';
-// import Button from './Button';
+import {
+    Card, Button, CardHeader, CardFooter, CardBody,
+    CardTitle, CardText
+} from 'reactstrap';
 
 const ArticleCard = (props) => {
     return (
@@ -10,9 +12,8 @@ const ArticleCard = (props) => {
                     {props.headline}
                     <Button className="m-2 btn-danger" onClick={() => props.deleteSingleArticle(props.id)}>X</Button>
                 </CardHeader>
-                <CardBody className="justify-content-center">
+                <CardBody>
                     <CardText>{props.summary}</CardText>
-                    <hr className="my-2" />
                     <Button className="m-2">Link to URL</Button>
                     <Button className="m-2" onClick={() => props.saveArticles(props.id)}>Save Article</Button>
                 </CardBody>

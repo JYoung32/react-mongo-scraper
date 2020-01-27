@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Routes
-require('./routes/apiRoutes')(app)
+require('./routes')(app)
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, console.log(`App is running on localhost:${PORT}`));
