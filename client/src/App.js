@@ -7,14 +7,12 @@ import "./App.css";
 
 const App = () => 
   <Router>
-  <div>
     <Nav />
     <Switch>
       <Route exact path="/" component={Articles} />
       <Route exact path="/saved" component={savedArticles} />
       <Route component={Articles} />
     </Switch>
-  </div>
   </Router>;
 
 export default App;

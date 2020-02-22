@@ -5,7 +5,7 @@ const Jumbotron = ({ children }) =>
   //   {children}
   // </div>;
 
-  <div className="jumbotron text-center">
+  <div className="jumbotron text-center w-100">
     <div className="overlay">
     </div>
     <div className="background-image">
