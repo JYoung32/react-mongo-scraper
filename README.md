@@ -19,7 +19,8 @@ React-Mongo-Scraper is a web application grabbing news articles and allow the us
 ----
 
 ## Link to the live page
-[React-Mongo-Scraper heroku deployed link](https://thawing-lowlands-26119.herokuapp.com/)
+[React-Mongo-Scraper heroku deployed link](https://thawing-lowlands-26119.herokuapp.com/)  
+  
 ![GIF example](./public/img/react-mongo-scraper-example.gif)
 
 ----
